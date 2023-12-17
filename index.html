@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Timeline with Centered Collage</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="timeline-container">
+  <div class="timeline">
+    <div class="timeline-dot" id="timelineDot"></div>
+  </div>
+
+  <div class="timeline-images" id="timelineImages">
+    <!-- Placeholder images and descriptions -->
+    <img src="https://via.placeholder.com/75" class="timeline-image" alt="Image 1">
+    <img src="https://via.placeholder.com/75" class="timeline-image" alt="Image 2">
+    <img src="https://via.placeholder.com/75" class="timeline-image" alt="Image 3">
+    <img src="https://via.placeholder.com/75" class="timeline-image" alt="Image 4">
+    <img src="https://via.placeholder.com/75" class="timeline-image" alt="Image 5">
+    <img src="https://via.placeholder.com/75" class="timeline-image" alt="Image 6">
+    <!-- Add more images as needed -->
+  </div>
+
+  <div class="timeline-text-container">
+    <p id="timelineText" class="short-description">Description for Image</p>
+    <a id="readMoreButton" class="waves-effect waves-light btn-small" onclick="toggleDescription()">Read More...</a>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
