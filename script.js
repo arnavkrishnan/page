@@ -8,6 +8,8 @@ document.addEventListener("DOMContentLoaded", function () {
   let currentIndex = 0;
   let isDragging = false;
   let isFullDescription = false;
+  let fullDescriptions = ["Sailing has been an integral part of my life for the last 4 years. My sailing journey began in a small dinghies at Shoreline Lake during a summer camp. However, I instantly fell in love with it: now, I’m on a high school sailing club in Redwood Shores with sailors from many different schools (including a Nueva sophomore, Max) where I get to sail Olympic-class International FJ’s. What’s not to love?","Coding has shaped me in so many ways during the last 5 years. I began  learning to code Python, and since then I’ve come a long way. I now do competitive programming in Python (USACO) and Web Development using HTML, CSS, and JavaScript, the very coding languages that were put to work to make this website.","I joined MVLA Service League of Boys (SLOBS) where I made and packed NN sandwiches for the XX event. It was hours of work, but a fulfilling experience, knowing that I am able to help those less fortunate around me. It’s easy to forget the privileges we enjoy here, so it’s important that we maintain a sense of gratitude and giving in our lives.","Music is how I de-stresses. It’s creative and uses different parts of the mind and body than the rest of my day. It is also a very social activity - I get to play with my friends during our chamber ensemble at school. My favorite instrument, by far, is the piano, but I can also play the Alto Saxophone. I’ve been playing the piano for years, including at the Stanford jazz summer workshop.","One thing few people know about me, and almost nobody expects from me, is that I can speak Mandarin.  I chose to learn Mandarin because it allows me tap into one of the world's fastest-growing economies, opening up vast opportunities for business and career advancement. Additionally, mastering Mandarin enhances my cultural competence, fostering stronger connections with a global community and providing a valuable skill in an increasingly interconnected world."]
+  let shortDescriptions = ["Unfortunately, we don't get a lot of pictures out on the water... Here's me rigging up my boat for launch (I haven't changed yet).","This is the beginning part of Bach's Invention #13 in A Minor, one of my favorite songs."]
 
   // Initialize timeline
   for (let i = 0; i < 6; i++) {
@@ -24,6 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // Update timeline item based on currentIndex
+
   function updateTimelineItem() {
     // Remove highlighting from all media items
     Array.from(timelineMedia.children).forEach((child) => {
@@ -43,7 +46,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Update description content
   function updateDescription() {
-    const shortDescription = `Description for Media ${currentIndex + 1}`;
+    const shortDescription = `Description for Media ${currentIndex + 1}:\n${shortDescriptions[currentIndex]}`;
     const fullDescription = `Extended description for Media ${currentIndex + 1}. This is a longer text providing more details about the media item.`;
 
     timelineText.textContent = isFullDescription ? fullDescription : shortDescription;
