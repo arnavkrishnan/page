@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
   let currentIndex = 0;
   let isDragging = false;
   let isFullDescription = false;
+  let isImageFullscreen = false;
 
   let fullDescriptions = ["Sailing has been an integral part of my life for the last 4 years. My sailing journey began in a small dinghies at Shoreline Lake during a summer camp. However, I instantly fell in love with it: now, I’m in a high school sailing club in Redwood Shores with sailors from many different schools (including a Nueva sophomore, Max) where I get to sail Olympic-class International FJ’s. What’s not to love?","Coding has shaped me in so many ways during the last five years. I began  learning to code in Python, and since then I’ve come a long way. I now do competitive programming in Python (USACO) and Web Development using HTML, CSS, and JavaScript, the very coding languages that were put to work to make this website!","One thing few people know about me, and almost nobody expects from me, is that I can speak Mandarin.  I chose to learn Mandarin because it allows me to tap into one of the world's fastest-growing economies, opening up vast opportunities in business and career. Additionally, mastering Mandarin enhances my cultural competence, fostering stronger connections with a global community and providing a valuable skill in an increasingly interconnected world.","I joined MVLA Service League of Boys (SLOBs) where I made and packed 50 sandwiches for malnourished people in and around Los Altos Hills. It was hours of work, but a fulfilling experience, knowing that I am able to help those less fortunate around me. It’s easy to forget the privileges we enjoy here, so it’s important that we maintain a sense of gratitude and giving in our lives.","Music is how I de-stresses. It’s creative and uses different parts of the mind and body than the rest of my day. It is also a very social activity - I get to play with my friends during our chamber ensemble at school. My favorite instrument, by far, is the piano, but I can also play the Alto Saxophone. I’ve been playing the piano for years, including at the Stanford jazz summer workshop."];
   let shortDescriptions = ["Me rigging up a boat to sail (not yet wearing gear)...", "Me playing the beginning of Bach's Invention No. 13 in A minor - my favorite classical piece.","Me before dropping off 50 PB&J's for distribution to the malnourished as a part of MVLA SLOBs","My Mandarin Essay Contest submission. Results coming in late January!","I regularly teach my brother coding - this time we recorded our first practice problem: FizzBuzz in JavaScript!"];
@@ -18,6 +19,9 @@ document.addEventListener("DOMContentLoaded", function () {
     dot.className = "timeline-dot";
     dot.addEventListener("mousedown", (event) => startDrag(event, i));
     timelineDot.appendChild(dot);
+
+    const mediaItem = timelineMedia.children[i];
+    mediaItem.addEventListener("click", () => toggleFullscreen(i));
   }
 
   // Show timeline item
@@ -99,6 +103,60 @@ document.addEventListener("DOMContentLoaded", function () {
   function toggleDescription() {
     isFullDescription = !isFullDescription;
     updateDescription();
+  }
+
+  // Toggle fullscreen mode for images
+  function toggleFullscreen(index) {
+    const mediaItem = timelineMedia.children[index];
+
+    if (!isImageFullscreen) {
+      // Save the current scroll position
+      const scrollY = window.scrollY;
+
+      // Create a fullscreen container
+      const fullscreenContainer = document.createElement("div");
+      fullscreenContainer.className = "fullscreen-container";
+      document.body.appendChild(fullscreenContainer);
+
+      // Clone the clicked media item and append it to the fullscreen container
+      const fullscreenMediaItem = mediaItem.cloneNode(true);
+      fullscreenMediaItem.style.maxHeight = "80vh"; // Set max height for comfort
+      fullscreenContainer.appendChild(fullscreenMediaItem);
+
+      // Enter fullscreen mode
+      isImageFullscreen = true;
+
+      // Disable scrolling on the body
+      document.body.style.overflow = "hidden";
+
+      // Listen for the "Escape" key to exit fullscreen
+      document.addEventListener("keydown", function exitFullscreenOnEscape(event) {
+        if (event.key === "Escape") {
+          exitFullscreen();
+          document.removeEventListener("keydown", exitFullscreenOnEscape);
+        }
+      });
+
+      // Scroll to the saved position
+      window.scrollTo(0, scrollY);
+    } else {
+      // Exit fullscreen mode
+      exitFullscreen();
+    }
+  }
+
+  // Exit fullscreen mode
+  function exitFullscreen() {
+    isImageFullscreen = false;
+
+    // Enable scrolling on the body
+    document.body.style.overflow = "";
+
+    // Remove the fullscreen container
+    const fullscreenContainer = document.querySelector(".fullscreen-container");
+    if (fullscreenContainer) {
+      fullscreenContainer.remove();
+    }
   }
 
   // Initialize timeline on load
