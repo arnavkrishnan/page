@@ -80,15 +80,9 @@ body {
   text-align: left;
 }
 
-.short-description {
+.full-description {
   margin-top: 10px;
   font-size: 14px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.full-description {
   overflow: visible;
   white-space: normal;
 }
