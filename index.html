@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Interactive Timeline with Centered Collage</title>
+  <title>Image Gallery</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -11,38 +11,55 @@
 
 <!-- Warning banner for non-mobile users -->
 <div class="warning-banner">
-  <p>This website is not optimized for mobile devices. Please use a desktop or laptop for the best experience. Additionally, the website will be slower the farther away you are from Los Altos - and it won't load if you aren't on the West Coast.</p>
+  <p>This website is not optimized for mobile devices. Please use a desktop or laptop for the best experience.</p>
 </div>
 
-<div class="timeline-container">
-  <div class="timeline">
-    <div class="timeline-dot" id="timelineDot"></div>
-  </div>
+<div class="gallery-container">
+  <div class="gallery">
+    <div class="button-container">
+      <button class="gallery-button" onclick="showMedia(0)">Show Image 1</button>
+      <button class="gallery-button" onclick="showMedia(1)">Show Video 1</button>
+      <button class="gallery-button" onclick="showMedia(2)">Show Image 2</button>
+      <button class="gallery-button" onclick="showMedia(3)">Show Image 3</button>
+      <button class="gallery-button" onclick="showMedia(4)">Show Video 2</button>
+      <!-- Add more buttons as needed -->
+    </div>
 
-  <div class="timeline-media" id="timelineMedia">
-    <img src="assets/sailing-docks.jpg" class="timeline-media-item timeline-image" alt="Image 1">
-    <video class="timeline-media-item timeline-video" controls>
-      <source src="assets/bach-invention-13-a-minor.mp4" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
-    <img src="assets/sandwich-giving.jpg" class="timeline-media-item timeline-image" alt="Image 2">
-    <img src="assets/mandarin-essay-page-1.png" class="timeline-media-item timeline-image" alt="Image 3">
-    <video class="timeline-media-item timeline-video" controls>
-      <source src="assets/coding.mp4" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
-    <!-- Add more images and videos as needed -->
-  </div>
-
-  <div class="timeline-text-container">
-    <p id="timelineText" class="full-description">Description for Media</p>
-    <a id="readMoreButton" class="waves-effect waves-light btn-small" onclick="toggleDescription()">Read More...</a>
+    <div class="gallery-media" id="galleryMedia">
+      <div class="image-container">
+        <img id="selectedImage" class="gallery-media-item" alt="Selected Image">
+      </div>
+    </div>
+    
+    <div class="gallery-text-container">
+      <p id="galleryText" class="full-description">Description for Media</p>
+      <a id="readMoreButton" class="waves-effect waves-light btn-small" onclick="toggleDescription()">Read More...</a>
+    </div>
   </div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.1/baguetteBox.min.js"></script>
 <script src="script.js"></script>
+
+<!-- Adding image and video files -->
+<script>
+  const mediaPaths = [
+    "assets/sailing-docks.jpg",
+    "assets/bach-invention-13-a-minor.mp4",
+    "assets/sandwich-giving.jpg",
+    "assets/mandarin-essay-page-1.png",
+    "assets/coding.mp4"
+  ];
+
+  // Preload images and videos
+  mediaPaths.forEach((path) => {
+    const preloadElement = document.createElement(path.endsWith(".mp4") ? "video" : "img");
+    preloadElement.src = path;
+    preloadElement.style.display = "none";
+    document.body.appendChild(preloadElement);
+  });
+</script>
+
 </body>
 </html>
